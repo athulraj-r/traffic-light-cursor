@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Traffic Light Cursor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="titlebar" id="dragRegion">
+      <span class="titlebar-label">TRAFFIC LIGHT CURSOR</span>
+      <button class="close-btn" id="closeBtn" title="Quit">&times;</button>
+    </div>
+
+    <div class="housing">
+      <div class="light red" id="lightRed"><div class="glow"></div></div>
+      <div class="light yellow" id="lightYellow"><div class="glow"></div></div>
+      <div class="light green" id="lightGreen"><div class="glow"></div></div>
+    </div>
+
+    <div class="status">
+      <div class="status-label">TRAFFIC STATUS</div>
+      <div class="status-state" id="statusState">&#9679; RED</div>
+      <div class="status-cursor" id="statusCursor">CURSOR: STOPPED</div>
+    </div>
+
+    <div class="message" id="message"></div>
+
+    <div class="controls">
+      <button class="btn chaos" id="chaosBtn">CHAOS MODE</button>
+      <button class="btn disable" id="disableBtn">DISABLE</button>
+    </div>
+
+    <div class="hint">Press <kbd>ESC</kbd> for Emergency Exit<br/><kbd>S</kbd> Speed Penalty &bull; <kbd>R</kbd> Reverse Gear</div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

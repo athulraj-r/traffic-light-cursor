@@ -2,96 +2,160 @@
 
 
 
-# [Project Name] 🎯
-
+# Traffic Light Cursor 🚦🎯
 
 ## Basic Details
-### Team Name: [Name]
-
+### Team Name: Traffic Violators
 
 ### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Team Lead: Athulraj R - Muthoot Institute of Technology & Science
+- Member 2: Benjamin Chacko - Muthoot Institute of Technology & Science
 
 ### Project Description
-[2-3 lines about what your project does]
+Traffic Light Cursor is an intentionally useless desktop application that forces real-world municipal road rules onto your operating system mouse cursor. Intercepting input deep within the OS event pipeline, it halts your pointer on Red, slashes cursor speed to a crawl on Yellow, throws steering into Reverse Gear, and sentences reckless speeders to an unclosable mandatory traffic safety school video!
 
 ### The Problem (that doesn't exist)
-[What ridiculous problem are you solving?]
+Modern desktop computing has an uncontrolled speeding problem. For decades, computer users have been recklessly whipping their mouse pointers across high-refresh-rate multi-monitor displays at breakneck velocities. There were no speed limits, no traffic lights, no mandatory pedestrian crossings, and zero accountability for reckless scrolling and aggressive cursor handling.
 
 ### The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+We built a ruthless, desktop-anchored traffic enforcement system for Windows and macOS. Backed by low-level OS input hooks (`WH_MOUSE_LL` on Windows and CoreGraphics `CGEventTap` on macOS), it takes full authoritarian control of your physical mouse cursor:
+- 🔴 **Red Light**: Completely immobilizes the cursor. No matter how hard you drag your mouse, it will not budge.
+- 🟡 **Yellow Light**: Slashes cursor sensitivity to a sluggish 15% crawl speed with sticky sub-pixel drag.
+- 🟢 **Green Light**: Full-speed cruising—until sudden road hazards strike!
+- 🚨 **Speeding Violations**: Flicking or swiping the cursor faster than the posted pixel speed limit immediately triggers a violation, freezing the mouse and forcing you to sit through an unclosable traffic safety video (`video.mp4`).
+- 🔄 **Reverse Gear**: Every alternating cycle, mouse steering axes invert completely (up is down, left is right).
+- 🌀 **Hyper-Chaos Mode**: Randomized rapid lamp flickering, speed multiplier swings, erratic drift, and involuntary control reversals.
+- 🤡 **Fake Troll Buttons**: The "DISABLE" and "Close" (`X`) buttons are ragebait traps that throw bureaucratic error popups (*"Error 418: I am a coconut"*, *"Your disable request has been submitted to the DMV. Estimated wait time: 4 to 6 weeks"*).
+- 🛑 **Emergency Escape**: The global `ESC` key is your only legal escape hatch to terminate the app and restore your system cursor.
 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
+- **Languages used**: C++ (C++17 for Windows), JavaScript (ES6+ / Node.js for macOS), C (CoreGraphics native C module)
+- **Frameworks used**: Electron (cross-platform desktop runtime for macOS), Win32 API / GDI (lightweight, zero-dependency native Windows GUI)
+- **Libraries used**:
+  - *Windows*: Windows SDK (`user32`, `gdi32`, `comctl32`), Windows Media Foundation (`mfplat`, `mfplay` for hardware-accelerated video playback)
+  - *macOS*: CoreGraphics / Quartz Event Services (`CGEventTap`, `CGEventPost`), `uiohook-napi` (global low-level hotkeys & velocity tracking), `@nut-tree-fork/nut-js`
+- **Tools used**: CMake (3.16+), MinGW-w64 (GCC/G++), Node.js (v18+), npm, node-gyp, Git
 
 For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
+- *N/A (Pure Software Chaos)*
 
 ### Implementation
 For Software:
+
 # Installation
-[commands]
+
+#### Prerequisites:
+- **Windows**: MinGW-w64 (GCC/G++ with `gdi32`, `user32`, `mfplay` support) and CMake (3.16+).
+- **macOS**: Node.js 18+, npm, and macOS Accessibility / Input Monitoring permissions.
+
+#### Clone repository:
+```bash
+git clone https://github.com/athulraj-r/trafffic-light-cursor.git
+cd trafffic-light-cursor
+```
+
+#### Windows Setup:
+```bash
+cd windows
+# Configure and build using CMake and MinGW:
+mkdir build && cd build
+cmake -G "MinGW Makefiles" ..
+cmake --build . --config Release
+
+# Or simply run the automated build script:
+..\build.bat
+```
+
+#### macOS Setup:
+```bash
+cd mac
+npm install
+npm run build:native   # Compiles native CoreGraphics warp.node module
+```
 
 # Run
-[commands]
+
+#### On Windows:
+```bash
+cd windows\build
+.\traffic_light.exe
+```
+
+#### On macOS:
+```bash
+cd mac
+npm start
+```
+> **Note for macOS:** Ensure Accessibility and Input Monitoring permissions are granted to your terminal app or Electron under **System Settings → Privacy & Security**.
+
+### Controls & Hotkeys
+
+| Control / Key | Action |
+|---|---|
+| `ESC` (Global) | **Emergency Exit** — Immediately terminates the app and restores standard OS cursor behavior |
+| `S` (Global) | **Force Speeding Violation** — Triggers the mandatory traffic school penalty video |
+| `R` (Global) | **Toggle Reverse Gear** — Inverts horizontal and vertical mouse steering axes |
+| **CHAOS MODE** Button | Toggles hyper-erratic signal cycles, jitters, drift, and inverted controls |
+| **DISABLE** Button | Fake button! Spawns ragebait troll popups from the Traffic Authority |
+| **Close ("X")** Button | Fake button! Spawns unhelpful bureaucratic rejection popups |
 
 ### Project Documentation
 For Software:
 
-# Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+# Screenshots
+![Traffic Light UI](https://github.com/user-attachments/assets/8920b256-2ba8-4988-b824-5351134eb4bd)
+*Desktop Traffic Light Signal Widget displaying active signal status and cursor state*
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+![Speeding Penalty Screen](https://github.com/user-attachments/assets/8920b256-2ba8-4988-b824-5351134eb4bd)
+*Mandatory Traffic Safety School: Cursor is locked while defensive driving video is enforced*
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+![Troll Popups](https://github.com/user-attachments/assets/8920b256-2ba8-4988-b824-5351134eb4bd)
+*Ragebait bureaucratic popup triggered when attempting to click Disable or Close*
 
 # Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-*Add caption explaining your workflow*
+```mermaid
+flowchart TD
+    MouseInput[User Moves Physical Mouse] --> Hook[OS Input Interception Hook\nWindows: WH_MOUSE_LL | macOS: CGEventTap]
+    
+    Hook --> SpeedCheck{Velocity > Speed Limit?\n> 1100 px/s Green\n> 700 px/s Yellow}
+    SpeedCheck -- YES --> VideoPenalty[🚨 MANDATORY TRAFFIC SCHOOL\n- Cursor Frozen\n- Unclosable video.mp4 plays]
+    
+    SpeedCheck -- NO --> StateCheck{Active Signal State}
+    
+    StateCheck -- RED --> Freeze[🔴 RED LIGHT\nDrop Event / Suppress Movement\nCursor Position Frozen]
+    StateCheck -- YELLOW --> SlowDown[🟡 YELLOW LIGHT\nScale delta by 15%\nAdd sub-pixel drag & drift]
+    StateCheck -- GREEN --> ReverseCheck{Reverse Gear Active?}
+    
+    ReverseCheck -- YES --> Invert[🔄 REVERSE GEAR\ndx = -dx, dy = -dy\nInverted Steering]
+    ReverseCheck -- NO --> NormalMove[🟢 GREEN LIGHT\nAllow Normal Cursor Movement]
 
-For Hardware:
+    UI[Traffic Light Window HUD] --> ChaosBtn[CHAOS MODE]
+    ChaosBtn --> ChaosLoop[Rapid flickers, random multipliers & drift]
+    
+    UI --> FakeBtns[DISABLE / CLOSE Buttons]
+    FakeBtns --> TrollDialog[🤡 Ragebait Troll Popups\nError 418, DMV wait times, etc.]
 
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
-# Build Photos
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
+    Hotkeys[Global Key Listener\nLow-Level Keyboard Hook] --> EscKey[ESC: Emergency Shutdown & Cursor Restore]
+    Hotkeys --> SKey[S: Force Speeding Penalty]
+    Hotkeys --> RKey[R: Toggle Reverse Gear]
+```
+*Architecture and input pipeline workflow of the Traffic Light Cursor system*
 
 ### Project Demo
 # Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
+The application bundles a built-in penalty demo video:
+- [Mandatory Traffic Safety Video Demo](windows/video.mp4)
+*Demonstrates the mandatory traffic safety school video played whenever a speeding violation or emergency stop occurs.*
 
 # Additional Demos
-[Add any extra demo materials/links]
+- Windows Standalone Executable: Built to `windows/build/traffic_light.exe`
+- macOS Native App: Runnable via `npm start` in `mac/`
 
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
+- Athulraj R : Windows Version (Win32 low-level hooks, GDI render loop, Media Foundation video integration, and CMake configuration)
+- Benjamin Chacko : Mac Version (Electron app, native CoreGraphics event tap `warp.c`, keyboard hooks, UI styling, and penalty management)
 
 ---
 Made with ❤️ at TinkerHub Useless Projects 

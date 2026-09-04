@@ -1,0 +1,240 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  font-family: -apple-system, 'SF Pro Display', 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+html, body {
+  background: transparent;
+  width: 100%;
+  height: 100%;
+}
+
+.app {
+  width: 320px;
+  min-height: 100%;
+  background: linear-gradient(180deg, #1b1d22 0%, #121317 100%);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 16px 24px;
+  color: #e7e7ea;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.titlebar {
+  -webkit-app-region: drag;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.titlebar-label {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: #7c7d85;
+  font-weight: 600;
+}
+
+.close-btn {
+  -webkit-app-region: no-drag;
+  background: transparent;
+  border: none;
+  color: #7c7d85;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.housing {
+  background: linear-gradient(180deg, #2a2c33 0%, #17181c 100%);
+  border-radius: 20px;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.04),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.5),
+    0 6px 14px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.light {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  position: relative;
+  background: #2b1414;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.6);
+  transition: background 0.25s ease;
+}
+.light.yellow { background: #2b2614; }
+.light.green  { background: #14251a; }
+
+.light .glow {
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.25s ease, box-shadow 0.25s ease;
+}
+
+.light.red .glow    { background: radial-gradient(circle at 35% 30%, #ff8a80, #ff3b30 60%, #b31f16); }
+.light.yellow .glow { background: radial-gradient(circle at 35% 30%, #fff2a8, #ffcc00 60%, #b38600); }
+.light.green .glow  { background: radial-gradient(circle at 35% 30%, #a8ffc0, #34c759 60%, #1c8a3a); }
+
+/* Magenta light for Reverse Gear */
+.light.green.magenta {
+  background: #2a1020;
+}
+.light.green.magenta .glow {
+  background: radial-gradient(circle at 35% 30%, #ff80df, #ff0080 60%, #800040);
+  opacity: 1;
+  box-shadow: 0 0 22px 6px rgba(255, 0, 128, 0.75);
+}
+
+.light.active .glow {
+  opacity: 1;
+}
+.light.red.active .glow    { box-shadow: 0 0 22px 6px rgba(255, 59, 48, 0.65); }
+.light.yellow.active .glow { box-shadow: 0 0 22px 6px rgba(255, 204, 0, 0.65); }
+.light.green.active .glow  { box-shadow: 0 0 22px 6px rgba(52, 199, 89, 0.65); }
+
+.status {
+  margin-top: 16px;
+  text-align: center;
+}
+.status-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #7c7d85;
+  margin-bottom: 4px;
+}
+.status-state {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: color 0.2s ease;
+}
+.status-state.RED { color: #ff453a; }
+.status-state.YELLOW { color: #ffd60a; }
+.status-state.GREEN { color: #32d74b; }
+.status-state.MAGENTA, .status-state.REVERSE { color: #ff0080; }
+.status-state.SPEEDING { color: #ff3b30; }
+.status-state.PROBATION { color: #34c759; }
+
+.status-cursor {
+  margin-top: 2px;
+  font-size: 11px;
+  color: #9a9aa2;
+  letter-spacing: 1px;
+  min-height: 16px;
+  line-height: 1.3;
+}
+
+.message {
+  height: 16px;
+  margin-top: 10px;
+  font-size: 11px;
+  text-align: center;
+  color: #f2c94c;
+  font-style: italic;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.message.show { opacity: 1; }
+
+.controls {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn {
+  -webkit-app-region: no-drag;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: transform 0.1s ease, filter 0.15s ease, background 0.2s ease;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn.chaos {
+  background: linear-gradient(180deg, #3a3d46, #26282e);
+  color: #e7e7ea;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.btn.chaos.active {
+  background: linear-gradient(180deg, #ff0080, #b30059);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(255, 0, 128, 0.4);
+}
+
+.btn.disable {
+  background: linear-gradient(180deg, #ff453a, #b31f16);
+  color: #fff;
+}
+.btn.disable.trolled {
+  background: linear-gradient(180deg, #ff9500, #cc7a00);
+  animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-3px, 0, 0); }
+  40%, 60% { transform: translate3d(3px, 0, 0); }
+}
+
+.hint {
+  margin-top: 10px;
+  font-size: 9.5px;
+  color: #5f606a;
+  text-align: center;
+  line-height: 1.4;
+}
+kbd {
+  background: #2c2d33;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #d1d1d6;
+}
+
+/* Dark-themed scrollbar — thin and subtle to match the aesthetic */
+.app::-webkit-scrollbar {
+  width: 5px;
+}
+.app::-webkit-scrollbar-track {
+  background: transparent;
+}
+.app::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+.app::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
