@@ -106,7 +106,7 @@ For Software:
 *Desktop Traffic Light Signal Widget displaying active signal status and cursor state*
 
 ![Speeding Penalty Screen](./assets/penalty.png)
-Speeding Penalty Popuo*
+*Speeding Penalty Popup*
 
 ![Troll Popups](./assets/troll.png)
 *Ragebait bureaucratic popup triggered when attempting to click Disable or Close*
