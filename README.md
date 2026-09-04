@@ -2,7 +2,7 @@
 
 
 
-# raffic Light Cursor 🚦🎯
+# Traffic Light Cursor 🚦🎯
 
 ## Basic Details
 ### Team Name: Traffic Violators
