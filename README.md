@@ -5,7 +5,7 @@
 # Traffic Light Cursor 🚦🎯
 
 ## Basic Details
-### Team Name: Traffic Violators
+### Team Name: Twin Towers
 
 ### Team Members
 - Team Lead: Athulraj R - Muthoot Institute of Technology & Science
@@ -118,7 +118,7 @@ For Software:
 ### Project Demo
 # Video
 The application bundles a built-in penalty demo video:
-- [Video Demo](./assets/video.mp4)
+- [Video Demo](./assets/video%20traffic.mp4)
 *Demonstrates the program working*
 
 # Additional Demos
