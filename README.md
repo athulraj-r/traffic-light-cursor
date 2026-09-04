@@ -38,9 +38,6 @@ For Software:
   - *macOS*: CoreGraphics / Quartz Event Services (`CGEventTap`, `CGEventPost`), `uiohook-napi` (global low-level hotkeys & velocity tracking), `@nut-tree-fork/nut-js`
 - **Tools used**: CMake (3.16+), MinGW-w64 (GCC/G++), Node.js (v18+), npm, node-gyp, Git
 
-For Hardware:
-- *N/A (Pure Software Chaos)*
-
 ### Implementation
 For Software:
 
@@ -105,48 +102,23 @@ npm start
 For Software:
 
 # Screenshots
-![Traffic Light UI](https://github.com/user-attachments/assets/8920b256-2ba8-4988-b824-5351134eb4bd)
+![Traffic Light UI](./assets/ui.png)
 *Desktop Traffic Light Signal Widget displaying active signal status and cursor state*
 
-![Speeding Penalty Screen](https://github.com/user-attachments/assets/8920b256-2ba8-4988-b824-5351134eb4bd)
-*Mandatory Traffic Safety School: Cursor is locked while defensive driving video is enforced*
+![Speeding Penalty Screen](./assets/penalty.png)
+Speeding Penalty Popuo*
 
-![Troll Popups](https://github.com/user-attachments/assets/8920b256-2ba8-4988-b824-5351134eb4bd)
+![Troll Popups](./assets/troll.png)
 *Ragebait bureaucratic popup triggered when attempting to click Disable or Close*
 
 # Diagrams
-```mermaid
-flowchart TD
-    MouseInput[User Moves Physical Mouse] --> Hook[OS Input Interception Hook\nWindows: WH_MOUSE_LL | macOS: CGEventTap]
-    
-    Hook --> SpeedCheck{Velocity > Speed Limit?\n> 1100 px/s Green\n> 700 px/s Yellow}
-    SpeedCheck -- YES --> VideoPenalty[🚨 MANDATORY TRAFFIC SCHOOL\n- Cursor Frozen\n- Unclosable video.mp4 plays]
-    
-    SpeedCheck -- NO --> StateCheck{Active Signal State}
-    
-    StateCheck -- RED --> Freeze[🔴 RED LIGHT\nDrop Event / Suppress Movement\nCursor Position Frozen]
-    StateCheck -- YELLOW --> SlowDown[🟡 YELLOW LIGHT\nScale delta by 15%\nAdd sub-pixel drag & drift]
-    StateCheck -- GREEN --> ReverseCheck{Reverse Gear Active?}
-    
-    ReverseCheck -- YES --> Invert[🔄 REVERSE GEAR\ndx = -dx, dy = -dy\nInverted Steering]
-    ReverseCheck -- NO --> NormalMove[🟢 GREEN LIGHT\nAllow Normal Cursor Movement]
-
-    UI[Traffic Light Window HUD] --> ChaosBtn[CHAOS MODE]
-    ChaosBtn --> ChaosLoop[Rapid flickers, random multipliers & drift]
-    
-    UI --> FakeBtns[DISABLE / CLOSE Buttons]
-    FakeBtns --> TrollDialog[🤡 Ragebait Troll Popups\nError 418, DMV wait times, etc.]
-
-    Hotkeys[Global Key Listener\nLow-Level Keyboard Hook] --> EscKey[ESC: Emergency Shutdown & Cursor Restore]
-    Hotkeys --> SKey[S: Force Speeding Penalty]
-    Hotkeys --> RKey[R: Toggle Reverse Gear]
-```
+![diagram](./assets/diagram.png)
 *Architecture and input pipeline workflow of the Traffic Light Cursor system*
 
 ### Project Demo
 # Video
 The application bundles a built-in penalty demo video:
-- [Mandatory Traffic Safety Video Demo](windows/video.mp4)
+- [Mandatory Traffic Safety Video Demo](./assets/video.mp4)
 *Demonstrates the mandatory traffic safety school video played whenever a speeding violation or emergency stop occurs.*
 
 # Additional Demos
