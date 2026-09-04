@@ -118,8 +118,8 @@ For Software:
 ### Project Demo
 # Video
 The application bundles a built-in penalty demo video:
-- [Mandatory Traffic Safety Video Demo](./assets/video.mp4)
-*Demonstrates the mandatory traffic safety school video played whenever a speeding violation or emergency stop occurs.*
+- [Video Demo](./assets/video.mp4)
+*Demonstrates the program working*
 
 # Additional Demos
 - Windows Standalone Executable: Built to `windows/build/traffic_light.exe`
