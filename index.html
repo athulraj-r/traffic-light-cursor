@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Citation No. TLC-2026-0417 — Traffic Light Cursor</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+
+  :root{
+    --paper: #efe8d3;
+    --paper-2: #e6dcbf;
+    --ink: #24211a;
+    --ink-soft: #4c4738;
+    --line: #b9ad86;
+    --stamp: #a83226;
+    --blue: #1f3b57;
+    --yellow: #c9932c;
+    --green: #3d6b46;
+    --paper-shadow: 0 30px 60px -25px rgba(0,0,0,.55), 0 2px 0 rgba(0,0,0,.15);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    background:
+      radial-gradient(1200px 700px at 15% -10%, #2b2f38 0%, #14161b 55%, #0c0d10 100%);
+    font-family:'IBM Plex Mono', ui-monospace, monospace;
+    color:var(--ink);
+    padding: clamp(20px, 4vw, 56px) clamp(12px, 4vw, 20px) 80px;
+    display:flex;
+    justify-content:center;
+  }
+
+  .sheet{
+    position:relative;
+    width:100%;
+    max-width:840px;
+    background:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 3px),
+      linear-gradient(160deg, var(--paper) 0%, var(--paper-2) 100%);
+    box-shadow: var(--paper-shadow);
+    border-radius: 3px;
+  }
+
+  /* torn perforation strip along the top */
+  .perf{
+    height: 14px;
+    background-image: radial-gradient(circle at 10px 7px, transparent 5px, var(--paper) 5.5px);
+    background-size: 20px 14px;
+    background-repeat: repeat-x;
+    background-color: transparent;
+    margin-bottom: -1px;
+  }
+
+  .sheet-inner{
+    padding: clamp(20px, 4vw, 48px) clamp(20px, 5vw, 56px) clamp(28px, 5vw, 48px);
+  }
+
+  /* ---------- letterhead ---------- */
+  .letterhead{
+    display:flex;
+    align-items:center;
+    gap: 18px;
+    padding-bottom: 18px;
+    border-bottom: 3px double var(--ink);
+  }
+  .seal{
+    flex: 0 0 auto;
+    width: 62px; height: 62px;
+    border-radius: 50%;
+    border: 2px solid var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+    background: var(--paper);
+  }
+  .seal::before{
+    content:"";
+    position:absolute; inset: 5px;
+    border: 1px dashed var(--ink-soft);
+    border-radius:50%;
+  }
+  .seal-glyph{ font-size: 26px; line-height:1; }
+  .letterhead-text .agency{
+    font-family:'Special Elite', 'IBM Plex Mono', monospace;
+    font-size: clamp(17px, 3vw, 22px);
+    letter-spacing: 0.5px;
+    margin:0;
+  }
+  .letterhead-text .division{
+    margin: 3px 0 0;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .case-row{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 16px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 13px;
+  }
+  .case-row strong{ color: var(--ink); }
+
+  /* ---------- stamp ---------- */
+  .stamp{
+    position:absolute;
+    top: 34px;
+    right: clamp(14px, 4vw, 44px);
+    transform: rotate(-9deg);
+    border: 3px solid var(--stamp);
+    color: var(--stamp);
+    font-family:'Special Elite', monospace;
+    font-size: clamp(13px, 2.2vw, 17px);
+    padding: 6px 10px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+    opacity: .85;
+    pointer-events:none;
+    text-align:center;
+    line-height:1.15;
+    mix-blend-mode: multiply;
+  }
+
+  /* ---------- fields ---------- */
+  .fields{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 24px;
+    padding: 18px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 13.5px;
+  }
+  .field label{
+    display:block;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink-soft);
+    margin-bottom: 2px;
+  }
+  .field .value{ color: var(--ink); }
+
+  section.block{
+    padding: 20px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  section.block:last-of-type{ border-bottom: none; }
+
+  h2.section-title{
+    font-family:'Special Elite', monospace;
+    font-weight: normal;
+    font-size: 14.5px;
+    letter-spacing: 1.5px;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+
+  .charges{ list-style:none; margin:0; padding:0; display:grid; gap:9px; }
+  .charges li{
+    display:flex; gap:10px; align-items:flex-start;
+    font-size: 13.5px; line-height:1.5;
+  }
+  .charges li .box{
+    flex: 0 0 auto;
+    width:15px; height:15px; margin-top:2px;
+    border: 1.5px solid var(--ink);
+    background: var(--ink);
+    position:relative;
+  }
+  .charges li .box::after{
+    content:"";
+    position:absolute; left:2px; top:-1px;
+    width:5px; height:9px;
+    border-right: 2px solid var(--paper);
+    border-bottom: 2px solid var(--paper);
+    transform: rotate(40deg);
+  }
+
+  p.narrative{
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink);
+    max-width: 62ch;
+  }
+
+  /* ---------- simulator ---------- */
+  .sim-frame{
+    border: 1px solid var(--ink);
+    background: repeating-linear-gradient(45deg, #dcd3b1 0 2px, #e4dbba 2px 4px);
+    padding: 3px;
+  }
+  .sim-box{
+    position:relative;
+    height: 220px;
+    background: #101317;
+    overflow:hidden;
+    cursor: none;
+    touch-action:none;
+  }
+  .sim-box::before{
+    content:"EXHIBIT A — CURSOR WILL BE ENFORCED WITHIN THIS AREA";
+    position:absolute; top:8px; left:10px;
+    color:#6b7280; font-size:9.5px; letter-spacing:1px;
+    pointer-events:none;
+  }
+  .sim-lights{
+    position:absolute; top: 8px; right: 10px;
+    display:flex; gap:6px;
+  }
+  .sim-lights .lamp{
+    width:12px; height:12px; border-radius:50%;
+    background:#2a2d33; box-shadow: inset 0 0 0 1px #000;
+  }
+  .sim-lights .lamp.on.red{ background:#ff4b4b; box-shadow: 0 0 10px 2px rgba(255,75,75,.8); }
+  .sim-lights .lamp.on.yellow{ background:#ffce4b; box-shadow: 0 0 10px 2px rgba(255,206,75,.8); }
+  .sim-lights .lamp.on.green{ background:#4ad672; box-shadow: 0 0 10px 2px rgba(74,214,114,.8); }
+
+  .sim-cursor{
+    position:absolute;
+    left:50%; top:50%;
+    font-size: 26px;
+    color:#f4f2ea;
+    transform: translate(-50%,-50%) rotate(-25deg);
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,.6));
+    will-change: left, top;
+    user-select:none;
+  }
+  .sim-cursor.reversed{ color:#ffce4b; }
+
+  .sim-status{
+    position:absolute; bottom:8px; left:10px;
+    font-size: 11px; color:#c9cdd6;
+    letter-spacing:.5px;
+  }
+
+  .sim-flash{
+    position:absolute; inset:0;
+    background: rgba(168,50,38,.92);
+    color:#fff2ea;
+    display:none;
+    align-items:center; justify-content:center;
+    text-align:center;
+    font-family:'Special Elite', monospace;
+    font-size: 15px;
+    letter-spacing: 1px;
+    line-height:1.6;
+    padding: 10px;
+  }
+  .sim-flash.show{ display:flex; }
+
+  .sim-controls{
+    display:flex; flex-wrap:wrap; gap:8px;
+    margin-top: 12px;
+  }
+  button{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: .5px;
+    padding: 8px 12px;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  button:hover{ background:#e2d8b6; }
+  button:focus-visible{ outline: 2px solid var(--blue); outline-offset:2px; }
+  button.active{ background: var(--ink); color: var(--paper); }
+
+  .sim-hint{
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    margin-top: 10px;
+  }
+
+  /* ---------- evidence log ---------- */
+  .evidence{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .evidence-col h3{
+    font-size: 11.5px;
+    letter-spacing: 1px;
+    margin: 0 0 8px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+  .evidence-col ul{ margin:0; padding-left: 18px; font-size: 12.5px; line-height:1.75; }
+
+  .stack-line{ font-size: 13px; line-height: 1.9; color: var(--ink); }
+  .stack-line b{ color: var(--blue); }
+
+  /* ---------- signatures ---------- */
+  .signatures{
+    display:flex; flex-wrap:wrap; gap: 40px;
+    margin-top: 6px;
+  }
+  .sig{ min-width: 180px; }
+  .sig .name{
+    font-family:'Special Elite', monospace;
+    font-size: 18px;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+  }
+  .sig .role{ font-size: 11px; color: var(--ink-soft); }
+
+  /* ---------- footer actions ---------- */
+  .actions{
+    display:flex; flex-wrap:wrap; gap: 12px;
+    align-items:center;
+    padding-top: 22px;
+    margin-top: 4px;
+    border-top: 3px double var(--ink);
+  }
+  .btn-primary{
+    background: var(--stamp); color:#fff2ea; border-color: var(--stamp);
+    padding: 11px 18px;
+    text-decoration:none;
+    display:inline-block;
+    font-size:12.5px;
+  }
+  .btn-primary:hover{ background:#8f2a20; }
+  .fine-note{ font-size: 11px; color: var(--ink-soft); }
+
+  /* ---------- modal ---------- */
+  .modal-backdrop{
+    position:fixed; inset:0; background: rgba(10,10,10,.6);
+    display:none; align-items:center; justify-content:center; padding:20px;
+    z-index: 20;
+  }
+  .modal-backdrop.show{ display:flex; }
+  .modal{
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    max-width: 360px;
+    padding: 22px;
+    font-size: 13px;
+    line-height:1.6;
+    box-shadow: 0 20px 40px rgba(0,0,0,.5);
+  }
+  .modal h3{
+    font-family:'Special Elite', monospace;
+    font-size: 15px; margin: 0 0 10px;
+    color: var(--stamp);
+  }
+  .modal button{ margin-top: 14px; }
+
+  @media (max-width: 560px){
+    .fields{ grid-template-columns: 1fr; }
+    .evidence{ grid-template-columns: 1fr; }
+    .stamp{ position: static; transform: rotate(-4deg); display:inline-block; margin-bottom: 10px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <div class="perf"></div>
+  <div class="sheet-inner">
+
+    <div class="stamp">VIOLATION<br>CONFIRMED</div>
+
+    <div class="letterhead">
+      <div class="seal"><span class="seal-glyph">🚦</span></div>
+      <div class="letterhead-text">
+        <p class="agency">MUNICIPAL BUREAU OF DESKTOP TRAFFIC SAFETY</p>
+        <p class="division">Division of Pointer Enforcement · Est. 2026</p>
+      </div>
+    </div>
+
+    <div class="case-row">
+      <div><strong>Case No.</strong> TLC-2026-0417</div>
+      <div><strong>Filed</strong> <span id="filedDate"></span></div>
+      <div><strong>Jurisdiction</strong> All Connected Monitors</div>
+    </div>
+
+    <div class="fields">
+      <div class="field"><label>Defendant</label><div class="value">Your Mouse Cursor</div></div>
+      <div class="field"><label>Vehicle</label><div class="value">OS Pointer — Windows / macOS</div></div>
+      <div class="field"><label>Prior Offenses</label><div class="value">Unregulated scrolling, aggressive dragging</div></div>
+      <div class="field"><label>Presiding Event</label><div class="value">TinkerHub Useless Projects 3.0</div></div>
+    </div>
+
+    <section class="block">
+      <h2 class="section-title">CHARGES</h2>
+      <ul class="charges">
+        <li><span class="box"></span> Proceeding through a red signal without stopping</li>
+        <li><span class="box"></span> Exceeding the posted pixel speed limit</li>
+        <li><span class="box"></span> Failure to complete mandatory traffic-safety viewing upon violation</li>
+        <li><span class="box"></span> Operating in reverse gear without signaling intent</li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h2 class="section-title">OFFICER'S NARRATIVE</h2>
+      <p class="narrative">
+        For decades, cursors have crossed high-refresh-rate displays with no
+        speed limits, no signals, and no accountability. This defendant
+        intercepts input at the OS level and applies real intersection rules
+        to it: full stop on red, a 15% crawl on yellow, a free hand on green —
+        until it moves too fast, at which point it is sentenced to an
+        unclosable traffic-safety video.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2 class="section-title">EXHIBIT A — LIVE VIOLATION SIMULATOR</h2>
+      <div class="sim-frame">
+        <div class="sim-box" id="simBox">
+          <div class="sim-lights">
+            <div class="lamp red" id="lampRed"></div>
+            <div class="lamp yellow" id="lampYellow"></div>
+            <div class="lamp green" id="lampGreen"></div>
+          </div>
+          <div class="sim-cursor" id="simCursor">➤</div>
+          <div class="sim-status" id="simStatus">GREEN — move your mouse inside the box</div>
+          <div class="sim-flash" id="simFlash"></div>
+        </div>
+      </div>
+      <div class="sim-controls">
+        <button data-force="red">Force Red</button>
+        <button data-force="yellow">Force Yellow</button>
+        <button data-force="green">Force Green</button>
+        <button data-force="auto" class="active">Auto-Cycle</button>
+        <button id="reverseBtn">Reverse Gear: Off</button>
+      </div>
+      <p class="sim-hint">Move the mouse inside the box above. Red halts the pointer, yellow drags it to a 15% crawl, and moving too fast on green triggers a citation — this is a sandboxed preview of what the real app does to your entire desktop.</p>
+    </section>
+
+    <section class="block">
+      <h2 class="section-title">EXHIBIT B — TECHNICAL EVIDENCE LOG</h2>
+      <div class="evidence">
+        <div class="evidence-col">
+          <h3>Windows</h3>
+          <ul>
+            <li>WH_MOUSE_LL low-level hook</li>
+            <li>GDI render loop for the signal widget</li>
+            <li>Media Foundation for the penalty video</li>
+            <li>Built with C++17 + CMake / MinGW</li>
+          </ul>
+        </div>
+        <div class="evidence-col">
+          <h3>macOS</h3>
+          <ul>
+            <li>CGEventTap (Quartz Event Services)</li>
+            <li>uiohook-napi for global hotkeys &amp; velocity</li>
+            <li>@nut-tree-fork/nut-js for cursor control</li>
+            <li>Electron shell, native CoreGraphics module</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="section-title">SENTENCE</h2>
+      <p class="stack-line">
+        <b>Languages</b> — C++17, JavaScript (Node.js), C &nbsp;·&nbsp;
+        <b>Frameworks</b> — Electron, Win32 API / GDI &nbsp;·&nbsp;
+        <b>Tools</b> — CMake, MinGW-w64, node-gyp
+      </p>
+    </section>
+
+    <section class="block">
+      <h2 class="section-title">ARRESTING OFFICERS</h2>
+      <div class="signatures">
+        <div class="sig">
+          <div class="name">Athulraj R</div>
+          <div class="role">Windows build — hooks, GDI, Media Foundation · MITS</div>
+        </div>
+        <div class="sig">
+          <div class="name">Benjamin Chacko</div>
+          <div class="role">macOS build — Electron, CoreGraphics, UI · MITS</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="actions">
+      <a class="btn-primary" href="https://github.com/athulraj-r/trafffic-light-cursor" target="_blank" rel="noopener">Pay Fine → View Repository</a>
+      <button id="pleadBtn">Plead Not Guilty</button>
+      <span class="fine-note">Payment accepted in the form of a GitHub star.</span>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal">
+    <h3 id="modalTitle">Error 418: I Am a Coconut</h3>
+    <p id="modalBody">Your plea has been forwarded to the Desktop DMV. Estimated review time: 4 to 6 weeks, or one full sprint, whichever is longer.</p>
+    <button id="modalClose">Close</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var d = new Date();
+  document.getElementById('filedDate').textContent = d.toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' });
+
+  // ---------- simulator ----------
+  var box = document.getElementById('simBox');
+  var cursorEl = document.getElementById('simCursor');
+  var statusEl = document.getElementById('simStatus');
+  var flashEl = document.getElementById('simFlash');
+  var lamps = { red: document.getElementById('lampRed'), yellow: document.getElementById('lampYellow'), green: document.getElementById('lampGreen') };
+  var buttons = document.querySelectorAll('[data-force]');
+  var reverseBtn = document.getElementById('reverseBtn');
+
+  var state = 'green';
+  var autoMode = true;
+  var reverseOn = false;
+  var autoTimer = null;
+
+  var target = { x: 0, y: 0 };   // where the mouse actually is
+  var shown = { x: 0, y: 0 };    // where the cursor is currently drawn
+  var frozen = { x: 0, y: 0 };
+  var lastMove = { x: 0, y: 0, t: 0 };
+  var flashTimer = null;
+  var initialized = false;
+
+  function setLamp(s){
+    lamps.red.className = 'lamp red' + (s === 'red' ? ' on' : '');
+    lamps.yellow.className = 'lamp yellow' + (s === 'yellow' ? ' on' : '');
+    lamps.green.className = 'lamp green' + (s === 'green' ? ' on' : '');
+  }
+
+  function setStatusText(){
+    var label = state.toUpperCase();
+    var extra = state === 'red' ? ' — cursor halted'
+              : state === 'yellow' ? ' — crawling at 15%'
+              : ' — full speed, watch it';
+    statusEl.textContent = label + extra + (reverseOn ? ' · REVERSED' : '');
+  }
+
+  function applyState(s){
+    state = s;
+    setLamp(s);
+    setStatusText();
+    if(s === 'red'){
+      frozen.x = shown.x; frozen.y = shown.y;
+    }
+  }
+
+  function cycle(){
+    var order = ['green','yellow','red'];
+    var idx = order.indexOf(state);
+    applyState(order[(idx+1) % order.length]);
+  }
+
+  function startAuto(){
+    autoMode = true;
+    buttons.forEach(function(b){ b.classList.toggle('active', b.dataset.force === 'auto'); });
+    clearInterval(autoTimer);
+    autoTimer = setInterval(cycle, 3200);
+  }
+
+  function stopAuto(forced){
+    autoMode = false;
+    clearInterval(autoTimer);
+    buttons.forEach(function(b){ b.classList.toggle('active', b.dataset.force === forced); });
+  }
+
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var f = btn.dataset.force;
+      if(f === 'auto'){ startAuto(); applyState('green'); }
+      else { stopAuto(f); applyState(f); }
+    });
+  });
+
+  reverseBtn.addEventListener('click', function(){
+    reverseOn = !reverseOn;
+    reverseBtn.textContent = 'Reverse Gear: ' + (reverseOn ? 'On' : 'Off');
+    cursorEl.classList.toggle('reversed', reverseOn);
+    setStatusText();
+  });
+
+  function triggerViolation(){
+    if(flashEl.classList.contains('show')) return;
+    var num = 'V-' + Math.floor(1000 + Math.random()*8999);
+    flashEl.innerHTML = 'SPEEDING VIOLATION DETECTED<br><span style="font-size:12px;opacity:.85">Citation ' + num + ' issued</span>';
+    flashEl.classList.add('show');
+    var prevAuto = autoMode;
+    clearInterval(autoTimer);
+    applyState('red');
+    clearTimeout(flashTimer);
+    flashTimer = setTimeout(function(){
+      flashEl.classList.remove('show');
+      if(prevAuto){ startAuto(); applyState('green'); }
+      else { applyState('green'); stopAuto('green'); }
+    }, 1600);
+  }
+
+  function updateTarget(clientX, clientY){
+    var rect = box.getBoundingClientRect();
+    var x = clientX - rect.left;
+    var y = clientY - rect.top;
+    if(reverseOn){
+      x = rect.width - x;
+      y = rect.height - y;
+    }
+    var now = performance.now();
+    if(initialized){
+      var dt = Math.max(now - lastMove.t, 1);
+      var dist = Math.hypot(x - lastMove.x, y - lastMove.y);
+      var speed = dist / dt; // px per ms
+      if(state === 'green' && speed > 1.1){
+        triggerViolation();
+      }
+    }
+    lastMove = { x: x, y: y, t: now };
+    target.x = x; target.y = y;
+    initialized = true;
+  }
+
+  box.addEventListener('mousemove', function(e){ updateTarget(e.clientX, e.clientY); });
+  box.addEventListener('touchmove', function(e){
+    if(e.touches && e.touches[0]){ updateTarget(e.touches[0].clientX, e.touches[0].clientY); }
+  }, { passive:true });
+
+  function render(){
+    if(state === 'red'){
+      shown.x = frozen.x; shown.y = frozen.y;
+    } else if(state === 'yellow'){
+      shown.x += (target.x - shown.x) * 0.06;
+      shown.y += (target.y - shown.y) * 0.06;
+    } else {
+      shown.x = target.x; shown.y = target.y;
+    }
+    cursorEl.style.left = shown.x + 'px';
+    cursorEl.style.top = shown.y + 'px';
+    requestAnimationFrame(render);
+  }
+
+  // init to center of box
+  var r0 = box.getBoundingClientRect();
+  shown.x = target.x = frozen.x = r0.width/2;
+  shown.y = target.y = frozen.y = r0.height/2;
+
+  setLamp('green');
+  setStatusText();
+  startAuto();
+  requestAnimationFrame(render);
+
+  // ---------- troll modal ----------
+  var backdrop = document.getElementById('modalBackdrop');
+  var modalTitle = document.getElementById('modalTitle');
+  var modalBody = document.getElementById('modalBody');
+  var pleas = [
+    ["Error 418: I Am a Coconut", "Your plea has been forwarded to the Desktop DMV. Estimated review time: 4 to 6 weeks."],
+    ["Plea Received", "Your objection has been noted, printed, and immediately filed under a stack of other objections."],
+    ["Request Denied", "The Bureau finds your cursor's movements suspicious and recommends a defensive-dragging course."]
+  ];
+  document.getElementById('pleadBtn').addEventListener('click', function(){
+    var pick = pleas[Math.floor(Math.random()*pleas.length)];
+    modalTitle.textContent = pick[0];
+    modalBody.textContent = pick[1];
+    backdrop.classList.add('show');
+  });
+  document.getElementById('modalClose').addEventListener('click', function(){
+    backdrop.classList.remove('show');
+  });
+  backdrop.addEventListener('click', function(e){
+    if(e.target === backdrop) backdrop.classList.remove('show');
+  });
+})();
+</script>
+
+</body>
+</html>
