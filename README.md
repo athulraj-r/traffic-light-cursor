@@ -2,7 +2,7 @@
 
 
 
-# Traffic Light Cursor 🚦🎯(index.html)
+# [Traffic Light Cursor 🚦🎯](https://athulraj-r.github.io/traffic-light-cursor)
 
 ## Basic Details
 ### Team Name: Twin Towers
